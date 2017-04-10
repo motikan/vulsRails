@@ -2,7 +2,7 @@
 capybara-*.html
 .rspec
 /log
-!/log/brakeman/
+!/log/brakeman/*
 /tmp
 /db/*.sqlite3
 /db/*.sqlite3-journal

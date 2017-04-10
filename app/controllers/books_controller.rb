@@ -26,6 +26,8 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
+    File.open(Rails.root.join('public', params[:book][:name]))
+
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
