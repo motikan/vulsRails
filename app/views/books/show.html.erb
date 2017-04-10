@@ -2,7 +2,8 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @book.name %>
+  <%# https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/cross_site_scripting/index.markdown %>
+  <%= raw @book.name %>
 </p>
 
 <p>
@@ -12,7 +13,8 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @book.description %>
+  <%# https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/cross_site_scripting/index.markdown %>
+  <%= @book.description.html_safe %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

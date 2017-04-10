@@ -26,6 +26,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
+    # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/file_access/index.markdown
     File.open(Rails.root.join('public', params[:book][:name]))
 
     respond_to do |format|
