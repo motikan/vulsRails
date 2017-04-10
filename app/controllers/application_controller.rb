@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
   # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/cross-site_request_forgery/index.markdown
   # protect_from_forgery with: :exception
 
+  # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/basic_auth/index.markdown
+  http_basic_authenticate_with :name => "user", :password => "secret", :except => :index
 end
