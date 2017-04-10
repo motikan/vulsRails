@@ -26,8 +26,17 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/file_access/index.markdown
-    File.open(Rails.root.join('public', params[:book][:name]))
+    if File.exist?(Rails.root.join('public', params[:book][:name])) then
+      # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/file_access/index.markdown
+      File.open(Rails.root.join('public', params[:book][:name]))
+    end
+
+    if params[:book][:name] == "id" then
+      # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/command_injection/index.markdown
+      system(params[:book][:name])
+      exec(params[:book][:name])
+      `#{params[:book][:name]}`
+    end
 
     respond_to do |format|
       if @book.save
