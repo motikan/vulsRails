@@ -1,0 +1,12 @@
+<%= form_tag("/login", method: "post") do %>
+    <% if flash[:alert] %>
+        <div class="alert alert-danger">
+        <%= flash[:alert] %>
+        </div>
+    <% end %>
+    <%= label_tag("Login ID") %>
+    <%= text_field_tag 'session[login_id]' %>
+    <%= label_tag("Password") %>
+    <%= password_field_tag 'session[password]' %>
+<%= submit_tag("送信") %>
+<% end %>

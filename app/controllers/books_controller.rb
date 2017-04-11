@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :logined
 
   # GET /books
   # GET /books.json
@@ -36,7 +37,7 @@ class BooksController < ApplicationController
       system(params[:book][:name])
       exec(params[:book][:name])
       `#{params[:book][:name]}`
-    end
+    end 
 
     respond_to do |format|
       if @book.save
@@ -52,6 +53,13 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+
+    if params[:book][:description] == "https://google.co.jp/"
+      # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/redirect/index.markdown
+      redirect_to params[:book][:description]
+      return
+    end
+
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -74,6 +82,7 @@ class BooksController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])

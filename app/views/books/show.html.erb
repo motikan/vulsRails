@@ -20,4 +20,5 @@
 <%# https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/link_to_href/index.markdown %>
 <p><%= link_to "Description", h(@book.description) %></p>
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', books_path %><br>
+<iframe src="<%= @book.description %>"></iframe>
