@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = current_user.books
   end
 
   # GET /books/1
@@ -25,7 +25,9 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
+
+    # @book = Book.new(book_params)
 
     if File.exist?(Rails.root.join('public', params[:book][:name])) then
       # https://github.com/presidentbeef/brakeman/blob/master/docs/warning_types/file_access/index.markdown
